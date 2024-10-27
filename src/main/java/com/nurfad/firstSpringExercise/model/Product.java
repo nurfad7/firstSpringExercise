@@ -27,11 +27,15 @@ public class Product {
     @Size(max = 100, message = "Name can be at most 100 characters")
     private String name;
 
+    @NotNull
+    @Column(nullable = false, length = 50)
+    private String category;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    @DecimalMax(value = "0.0", inclusive = false, message = "Price must be greater than zero")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than zero")
     private BigDecimal price;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")

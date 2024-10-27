@@ -26,11 +26,12 @@ public class FavoriteProductController {
 
     @GetMapping("/{productId}")
     public ResponseEntity<Response<Optional<FavoriteProduct>>> getFavoriteProductByProductId(@PathVariable Long productId) {
-        return Response.successfulResponse("All favorite products fetched",
+        return Response.successfulResponse("item with product ID "
+                + productId + " was fetched",
                 favoriteProductService.getFavoriteProductByProductId(productId));
     }
 
-    @PutMapping("/{productId}")
+    @PostMapping("/{productId}")
     public ResponseEntity<Response<FavoriteProduct>> favorite(@PathVariable Long productId) {
         FavoriteProduct favoriteProduct = favoriteProductService.favorite(productId);
         return Response.successfulResponse("Product was "
