@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/favorite-products")
+@RequestMapping("/api/v1/favorites")
 public class FavoriteProductController {
     private final FavoriteProductService favoriteProductService;
 
