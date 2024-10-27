@@ -1,10 +1,13 @@
 package com.nurfad.firstSpringExercise.service;
 
-import org.springframework.stereotype.Service;
+import com.nurfad.firstSpringExercise.model.CartItem;
 
-@Service
-public class CartService {
-    public String getCart() {
-        return "Hello, It is your cart";
-    }
+import java.util.List;
+import java.util.Optional;
+
+public interface CartService {
+    public List<CartItem> getCart();
+    public CartItem addToCart(CartItem cartItem);
+    public CartItem updateCart(CartItem cartItem);
+    public void removeFromCart(Long id);
 }
