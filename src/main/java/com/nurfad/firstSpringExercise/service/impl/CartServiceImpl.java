@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public CartItem addToCart(CartItem cartItem) {
-        if (cartRepository.existByProductId(cartItem.getProductId())) {
+        if (cartRepository.existsByProductId(cartItem.getProductId())) {
             String productName = productRepository.findById(cartItem.getProductId())
                     .map(Product::getName)
                     .orElseThrow(() -> new DataNotFoundException("Product not found"));
