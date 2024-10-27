@@ -3,14 +3,13 @@ package com.nurfad.firstSpringExercise.controller;
 import com.nurfad.firstSpringExercise.model.Product;
 import com.nurfad.firstSpringExercise.responses.Response;
 import com.nurfad.firstSpringExercise.service.ProductService;
-import jakarta.validation.Valid;
-import org.apache.coyote.Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -29,16 +28,16 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<Product>> createProduct(@Valid @RequestBody Product product) {
+    public ResponseEntity<Response<Product>> createProduct(@Validated @RequestBody Product product) {
         Product savedProduct = productService.createProduct(product);
         return Response.successfulResponse(
                 HttpStatus.CREATED.value(),
-                "Product(s) was created",
+                "Product was created",
                 productService.updateProduct(savedProduct));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response<Product>> updateProduct(@Valid @RequestBody Product product,
+    public ResponseEntity<Response<Product>> updateProduct(@Validated @RequestBody Product product,
                                                            @PathVariable Long id) {
         product.setId(id);
         return Response.successfulResponse(
@@ -49,13 +48,12 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Response<Optional<Product>>> getProductById(@PathVariable Long id) {
-        return Response.successfulResponse("All products fetched",
+        return Response.successfulResponse("Product was updated",
                 productService.getProductById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response<Optional<Product>>> deleteProduct(@PathVariable Long id) {
-        return Response.successfulResponse("All products fetched",
-                productService.getProductById(id));
+    public ResponseEntity<Response<Objects>> deleteProduct(@PathVariable Long id) {
+        return Response.successfulResponse("Product was deleted");
     }
 }
